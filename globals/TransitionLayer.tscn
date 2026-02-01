@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://ukswxagof2do"]
+
+[ext_resource type="Script" uid="uid://5duc6wtyu33f" path="res://globals/TransitionLayer.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://daxuyaqam8c42" path="res://assets/shaders/advanced_circle_mask.gdshader" id="2_shader"]
+[ext_resource type="Texture2D" uid="uid://sk3mh2lajwlv" path="res://assets/images/star_pattern.svg" id="3_pattern"]
+[ext_resource type="PackedScene" uid="uid://bp4ro7piw0vlx" path="res://Project_jam_UI/scenes/loading.tscn" id="4_loading"]
+
+[sub_resource type="Gradient" id="Gradient_npln6"]
+colors = PackedColorArray(0.3203125, 0.9522095, 1, 1, 0.3203125, 0.729187, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_22eif"]
+gradient = SubResource("Gradient_npln6")
+
+[sub_resource type="Gradient" id="Gradient_22eif"]
+colors = PackedColorArray(1, 0.49019608, 0, 1, 1, 0.78431374, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lmfpc"]
+gradient = SubResource("Gradient_22eif")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_advanced"]
+shader = ExtResource("2_shader")
+shader_parameter/hole_center = Vector2(0.5, 0.5)
+shader_parameter/hole_radius = 0.0
+shader_parameter/aspect = 1.777
+shader_parameter/icon_color = Color(1, 1, 1, 1)
+shader_parameter/border_width = 0.1
+shader_parameter/white_edge_thickness = 0.01
+shader_parameter/pattern_texture = ExtResource("3_pattern")
+shader_parameter/pattern_scale = 10.0
+shader_parameter/pattern_speed = 0.5
+shader_parameter/pattern_rotation = 0.0
+
+[node name="TransitionLayer" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_script")
+cute_gradient = SubResource("GradientTexture1D_22eif")
+cute_icon_color = Color(1, 1, 1, 0.5019608)
+tough_gradient = SubResource("GradientTexture1D_lmfpc")
+tough_icon_color = Color(1, 1, 1, 0.5019608)
+
+[node name="FadeRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+
+[node name="TransitionRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_advanced")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_pattern")
+
+[node name="LoadingScreen" parent="." instance=ExtResource("4_loading")]
+visible = false

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Project_jam_UI/scripts/death_screen.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://bacillbyoj4uf" path="res://Project_jam_UI/font_folder/static/MarkaziText-Bold.ttf" id="2_font"]
+[ext_resource type="Shader" uid="uid://crd7phgckn4nf" path="res://Project_jam_UI/shaders/newtext_effect.gdshader" id="3_shader"]
+[ext_resource type="Script" uid="uid://ca7h86wxp661v" path="res://Project_jam_UI/scripts/text_script.gd" id="4_text_anim"]
+[ext_resource type="PackedScene" uid="uid://dtp26o6qyil6i" path="res://Project_jam_UI/scenes/button.tscn" id="5_ui_button"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_title"]
+shader = ExtResource("3_shader")
+shader_parameter/reveal = 0.0
+shader_parameter/distortion_strength = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/modulate_color = Vector4(1, 0, 0, 1)
+
+[node name="DeathScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+visible = false
+script = ExtResource("1_script")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.862745)
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_title")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85, 0.1, 0.1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 120
+text = "Game Over"
+horizontal_alignment = 1
+script = ExtResource("4_text_anim")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ReplayButton" parent="VBoxContainer" instance=ExtResource("5_ui_button")]
+layout_mode = 2
+text = "Replay"
+
+[node name="ExitButton" parent="VBoxContainer" instance=ExtResource("5_ui_button")]
+layout_mode = 2
+text = "Exit to Menu"
+
+[connection signal="pressed" from="VBoxContainer/ReplayButton" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]

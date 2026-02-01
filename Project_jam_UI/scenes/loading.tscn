@@ -1,0 +1,156 @@
+[gd_scene load_steps=9 format=3 uid="uid://bp4ro7piw0vlx"]
+
+[ext_resource type="Script" uid="uid://fbvrh17m8fds" path="res://Project_jam_UI/scenes/loading.gd" id="1_47c3i"]
+[ext_resource type="Shader" uid="uid://kf84id4odwtb" path="res://Project_jam_UI/shaders/ui_effect.gdshader" id="2_vymw4"]
+[ext_resource type="Texture2D" uid="uid://daasrbqp5om5g" path="res://Project_jam_UI/texture_folder/loading.png" id="3_tsapw"]
+[ext_resource type="FontFile" uid="uid://dttbcn1w0innr" path="res://Project_jam_UI/font_folder/static/MarkaziText-Regular.ttf" id="4_vymw4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rxd5"]
+shader = ExtResource("2_vymw4")
+shader_parameter/reveal = 0.0
+shader_parameter/distortion_strength = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_fceyd"]
+resource_name = "loading"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/distortion_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0.35, 0.35, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/reveal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.23, 1.37, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.36651915, 0.0, 0.0, -0.6894051, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jujr5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/distortion_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/reveal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.36651915]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ij4cj"]
+_data = {
+&"RESET": SubResource("Animation_jujr5"),
+&"loading": SubResource("Animation_fceyd")
+}
+
+[node name="loading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_47c3i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4rxd5")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = -205.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.36651915
+pivot_offset = Vector2(104, 102.5)
+texture = ExtResource("3_tsapw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ij4cj")
+}
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -327.5
+offset_top = -130.0
+offset_right = 327.5
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_vymw4")
+theme_override_font_sizes/font_size = 41
+text = "رؤية الكرات المشعة يقال عنها انها تخل بتوازن العالم!"

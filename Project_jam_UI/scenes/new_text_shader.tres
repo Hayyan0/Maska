@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnfuoiypofbap"]
+
+[ext_resource type="Shader" uid="uid://crd7phgckn4nf" path="res://Project_jam_UI/shaders/newtext_effect.gdshader" id="1_bgqcn"]
+
+[resource]
+shader = ExtResource("1_bgqcn")
+shader_parameter/reveal = 0.0
+shader_parameter/distortion_strength = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/modulate_color = Vector4(-1.46, -1.38, -0.995, 1)

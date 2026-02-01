@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc5nfnhoju3do"]
+
+[sub_resource type="GDScript" id="GDScript_4i3jp"]
+script/source = "extends Marker2D
+
+@export_category(\"Spawner Configuration\")
+@export var object_to_spawn: PackedScene
+@export var spawn_delay: float = 1.0
+@export var auto_start: bool = true
+@export var properties: Dictionary = {}
+
+@export_category(\"Conditional Spawning\")
+@export var spawn_on_mode: GameManager.GameMode = GameManager.GameMode.NATURAL # NATURAL means always spawn
+
+var has_spawned = false
+
+func _ready():
+	if auto_start:
+		start_spawner()
+
+func start_spawner():
+	if has_spawned:
+		return
+		
+	if spawn_delay > 0.0:
+		await get_tree().create_timer(spawn_delay).timeout
+	
+	check_and_spawn()
+
+func check_and_spawn():
+	if has_spawned:
+		return
+		
+	# Mode check
+	var current = GameManager.current_mode
+	if spawn_on_mode == GameManager.GameMode.NATURAL or current == spawn_on_mode:
+		spawn()
+	else:
+		# If mode doesn't match, we wait for mode change
+		if not GameManager.mode_changed.is_connected(_on_mode_changed):
+			GameManager.mode_changed.connect(_on_mode_changed)
+
+func _on_mode_changed(new_mode):
+	if has_spawned:
+		return
+		
+	if spawn_on_mode == GameManager.GameMode.NATURAL or new_mode == spawn_on_mode:
+		spawn()
+		if GameManager.mode_changed.is_connected(_on_mode_changed):
+			GameManager.mode_changed.disconnect(_on_mode_changed)
+
+func spawn():
+	if not object_to_spawn:
+		push_warning(\"Spawner: No object_to_spawn assigned!\")
+		return
+		
+	var instance = object_to_spawn.instantiate()
+	
+	# Add to scene tree
+	# We add it as a sibling to maintain global position relative to parent
+	get_parent().add_child(instance)
+	instance.global_position = global_position
+	
+	# Inject properties
+	for key in properties:
+		if instance.get(key) != null or key in instance:
+			instance.set(key, properties[key])
+		else:
+			push_warning(\"Spawner: Property '%s' not found on spawned object!\" % key)
+	
+	has_spawned = true
+	print(\"Spawner: Object spawned successfully.\")
+"
+
+[node name="Spawner" type="Marker2D"]
+script = SubResource("GDScript_4i3jp")

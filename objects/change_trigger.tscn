@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://diha58kwhhn1w"]
+
+[ext_resource type="Script" uid="uid://b1qppafihcpn3" path="res://objects/change_trigger.gd" id="1_mrl07"]
+[ext_resource type="Texture2D" uid="uid://cdxmkberwl4v4" path="res://assets/cute/CuteMask.png" id="2_gxfik"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gxfik"]
+radius = 15.0
+height = 200.0
+
+[node name="ChangeTrigger" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_mrl07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -70)
+shape = SubResource("CapsuleShape2D_gxfik")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -6)
+texture = ExtResource("2_gxfik")

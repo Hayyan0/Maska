@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://16vs2vw1qpq7"]
+
+[ext_resource type="Texture2D" uid="uid://ce7j1uv306t7t" path="res://assets/3.png" id="1_dv3lc"]
+
+[sub_resource type="GDScript" id="GDScript_dv3lc"]
+script/source = "extends StaticBody2D
+
+@onready var sprite = $Sprite2D
+@onready var collider = $CollisionShape2D
+
+# EXPORTED TEXTURES
+@export var tex_cute: Texture2D = preload(\"res://assets/cute/Tiles/tree1.png\")
+@export var tex_tough: Texture2D = preload(\"res://assets/3.png\") 
+
+@export_group(\"Alignment Settings\")
+@export var auto_align_sprite: bool = true
+@export var auto_align_collider: bool = true
+
+var is_fallen = false
+
+func _ready():
+	add_to_group(\"morphable\")
+	add_to_group(\"destructible\") # Required for player hitting it
+	
+	# Connect to mode change
+	if GameManager:
+		if not GameManager.mode_changed.is_connected(_on_mode_changed):
+			GameManager.mode_changed.connect(_on_mode_changed)
+		_on_mode_changed(GameManager.current_mode)
+
+func _on_mode_changed(mode):
+	if is_fallen: return
+	
+	if mode == GameManager.GameMode.TOUGH:
+		sprite.texture = tex_tough
+	else:
+		sprite.texture = tex_cute
+		
+	if sprite.texture:
+		var h = sprite.texture.get_height()
+		
+		# Align visuals
+		if auto_align_sprite:
+			sprite.centered = true
+			sprite.offset = Vector2.ZERO
+			sprite.position.y = -h / 2.0
+		
+		# Align collider to match texture height specifically
+		if auto_align_collider:
+			if not collider.shape is RectangleShape2D:
+				collider.shape = RectangleShape2D.new()
+			else:
+				# Make unique to avoid sharing shape data with other trees
+				collider.shape = collider.shape.duplicate()
+			
+			collider.shape.size.y = h
+			collider.position.y = -h / 2.0
+
+func take_damage(amount: int, is_parry: bool = false):
+	if GameManager.current_mode != GameManager.GameMode.TOUGH:
+		return
+	if is_fallen: 
+		return
+	_fall()
+
+func _fall():
+	is_fallen = true
+	
+	# FIND THE GROUND
+	var target_y = global_position.y
+	var space_state = get_world_2d().direct_space_state
+	var start_pos = global_position + Vector2(0, -10)
+	var end_pos = global_position + Vector2(0, 2000)
+	
+	var query = PhysicsRayQueryParameters2D.create(start_pos, end_pos)
+	query.exclude = [get_rid()]
+	query.collision_mask = 1 # World/ground layer
+	
+	var result = space_state.intersect_ray(query)
+	if result:
+		target_y = result.position.y
+
+	# ANIMATE FALL
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	# Rotate 90 degrees around the BASE (Origin)
+	tween.tween_property(self, \"rotation_degrees\", 90.0, 1.0).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	
+	# Drop to detected ground
+	tween.tween_property(self, \"global_position:y\", target_y, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(11, 559)
+
+[node name="TreeObject" type="StaticBody2D"]
+script = SubResource("GDScript_dv3lc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -1)
+texture = ExtResource("1_dv3lc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -193)
+shape = SubResource("RectangleShape2D_1")

@@ -1,0 +1,21 @@
+{
+  "resume": "Resume",
+  "start_game": "Play Game",
+  "setting": "Settings",
+  "Crd": "Credits",
+  "exit": "Exit",
+  "lan_display": "Language",
+  "master_sound": "Master Volume",
+  "talk_sound": "Dialogue Volume",
+  "soundeffect": "SFX Volume",
+  "music": "Music Volume",
+  "back": "Back",
+  "rest": "Restore Defaults",
+  "save": "Save Changes",
+  "do_you_want_exit": "Quit Game?",
+  "yes": "Yes",
+  "no": "No",
+  "game_over": "Game Over",
+  "replay": "Replay",
+  "exit_to_menu": "Exit to Menu"
+}

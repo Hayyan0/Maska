@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cjns0gb0krkij"
+path="res://.godot/imported/boss fight full.ogg-ca08b5896e4b0591117ca4629ebc831a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sounds/boss fight full.ogg"
+dest_files=["res://.godot/imported/boss fight full.ogg-ca08b5896e4b0591117ca4629ebc831a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

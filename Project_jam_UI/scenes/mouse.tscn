@@ -1,0 +1,224 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwhom5kgvigh0"]
+
+[ext_resource type="Script" uid="uid://dypnaavpmtkwg" path="res://Project_jam_UI/scripts/mouse.gd" id="1_sr1oj"]
+[ext_resource type="Texture2D" uid="uid://cy7wij5151irx" path="res://Project_jam_UI/texture_folder/mouse.png" id="2_tyk2x"]
+[ext_resource type="Texture2D" uid="uid://b4u1y303ioln7" path="res://Project_jam_UI/texture_folder/mouseh.png" id="3_uof87"]
+
+[sub_resource type="Animation" id="Animation_vlm1m"]
+resource_name = "off"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mouse_out/mouse2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mouse_out/mouse_select/mouse:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qt67i"]
+resource_name = "on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mouse_out/mouse2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mouse_out/mouse_select/mouse:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ovwm"]
+_data = {
+&"off": SubResource("Animation_vlm1m"),
+&"on": SubResource("Animation_qt67i")
+}
+
+[sub_resource type="Animation" id="Animation_8sm8a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mouse_out/mouse_select2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mouse_out/mouse_select:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ylx6b"]
+resource_name = "select"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mouse_out/mouse_select2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.9198622]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mouse_out/mouse_select:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.2217305]
+}
+
+[sub_resource type="Animation" id="Animation_n8c1t"]
+resource_name = "unselect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mouse_out/mouse_select2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mouse_out/mouse_select:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sm8a"]
+_data = {
+&"RESET": SubResource("Animation_8sm8a"),
+&"select": SubResource("Animation_ylx6b"),
+&"unselect": SubResource("Animation_n8c1t")
+}
+
+[node name="mouse" type="Control" groups=["Mouse"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sr1oj")
+metadata/_edit_use_anchors_ = true
+
+[node name="horred" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2ovwm")
+}
+speed_scale = 3.0
+blend_times = [&"off", &"off", 1.0, &"off", &"on", 1.0, &"on", &"off", 1.0, &"on", &"on", 1.0]
+
+[node name="mouse_out" type="Control" parent="."]
+anchors_preset = 0
+mouse_behavior_recursive = 1
+
+[node name="mouse2" type="TextureRect" parent="mouse_out"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -10.0
+offset_right = 26.0
+offset_bottom = 30.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("3_uof87")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="mouse_select" type="Control" parent="mouse_out"]
+anchors_preset = 0
+mouse_behavior_recursive = 1
+
+[node name="mouse" type="TextureRect" parent="mouse_out/mouse_select"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -10.0
+offset_right = 26.0
+offset_bottom = 30.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("2_tyk2x")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="mouse_select2" type="Control" parent="mouse_out"]
+anchors_preset = 0
+mouse_behavior_recursive = 1
+
+[node name="mouse" type="TextureRect" parent="mouse_out/mouse_select2"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -10.0
+offset_right = 26.0
+offset_bottom = 30.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("2_tyk2x")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="select_mode" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8sm8a")
+}
+speed_scale = 3.0
+blend_times = [&"select", &"select", 1.0, &"select", &"unselect", 1.0, &"unselect", &"select", 1.0, &"unselect", &"unselect", 1.0]

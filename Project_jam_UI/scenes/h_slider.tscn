@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgi8cymldi7ir"]
+
+[ext_resource type="Script" uid="uid://cs57wyhng2ug6" path="res://Project_jam_UI/scripts/h_slider.gd" id="1_gs54x"]
+
+[sub_resource type="DPITexture" id="DPITexture_1n5yw"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0047f"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.25929362, 0.2592937, 0.2592938, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgjwv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.8509804)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls3ou"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.3019608)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[node name="HSlider" type="HSlider"]
+anchors_preset = -1
+anchor_left = 0.118158124
+anchor_top = 1.3017241
+anchor_right = 0.89661163
+anchor_bottom = 1.5775863
+theme_override_icons/grabber = SubResource("DPITexture_1n5yw")
+theme_override_styles/slider = SubResource("StyleBoxFlat_0047f")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_dgjwv")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ls3ou")
+value = 50.0
+script = ExtResource("1_gs54x")
+metadata/_edit_use_anchors_ = true
+
+[node name="mouse_position" type="Node2D" parent="."]
+position = Vector2(-10.45, 0)
+
+[node name="mouse_position2" type="Node2D" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

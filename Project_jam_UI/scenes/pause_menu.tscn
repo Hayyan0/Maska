@@ -1,0 +1,427 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://Project_jam_UI/scripts/pause_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://vs0f7tm3xs7t" path="res://assets/LOGO/LOGO.png" id="2_logo"]
+[ext_resource type="PackedScene" uid="uid://dtp26o6qyil6i" path="res://Project_jam_UI/scenes/button.tscn" id="3_button"]
+[ext_resource type="FontFile" uid="uid://bacillbyoj4uf" path="res://Project_jam_UI/font_folder/static/MarkaziText-Bold.ttf" id="4_font"]
+[ext_resource type="Shader" uid="uid://crd7phgckn4nf" path="res://Project_jam_UI/shaders/newtext_effect.gdshader" id="5_shader"]
+[ext_resource type="Script" uid="uid://ca7h86wxp661v" path="res://Project_jam_UI/scripts/text_script.gd" id="6_text_script"]
+[ext_resource type="FontFile" uid="uid://dvgwboehui5eg" path="res://Project_jam_UI/font_folder/static/MarkaziText-Medium.ttf" id="7_markazi_font"]
+[ext_resource type="PackedScene" uid="uid://bgi8cymldi7ir" path="res://Project_jam_UI/scenes/h_slider.tscn" id="8_slider"]
+[ext_resource type="PackedScene" uid="uid://dxyc17x4k767r" path="res://Project_jam_UI/Global(autoLoad)/language_setting.tscn" id="9_lang"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_title"]
+shader = ExtResource("5_shader")
+shader_parameter/reveal = 0.0
+shader_parameter/distortion_strength = 0.0
+shader_parameter/center = Vector2(0.385, 0.0)
+shader_parameter/modulate_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panels"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.294118)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 110
+visible = false
+script = ExtResource("1_script")
+
+[node name="LangugeSetting" parent="." instance=ExtResource("9_lang")]
+targets = {
+NodePath("../ExitConfirmation/HBoxContainer/NoButton"): "no",
+NodePath("../ExitConfirmation/HBoxContainer/YesButton"): "yes",
+NodePath("../ExitConfirmation/Label"): "do_you_want_exit",
+NodePath("../PausePanel/Logo"): "logo",
+NodePath("../PausePanel/VBoxContainer/CreditsButton"): "Crd",
+NodePath("../PausePanel/VBoxContainer/ExitButton"): "exit_to_menu",
+NodePath("../PausePanel/VBoxContainer/ResumeButton"): "resume",
+NodePath("../PausePanel/VBoxContainer/SettingsButton"): "setting",
+NodePath("../SettingsPanel/Button"): "back",
+NodePath("../SettingsPanel/Button2"): "rest",
+NodePath("../SettingsPanel/Button3"): "save",
+NodePath("../SettingsPanel/Label"): "setting",
+NodePath("../SettingsPanel/setter"): "lan_display",
+NodePath("../SettingsPanel/setter2"): "master_sound",
+NodePath("../SettingsPanel/setter3"): "talk_sound",
+NodePath("../SettingsPanel/setter4"): "soundeffect",
+NodePath("../SettingsPanel/setter5"): "music"
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="PausePanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 50.0
+offset_right = 300.0
+offset_bottom = 350.0
+grow_horizontal = 2
+texture = ExtResource("2_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="ResumeButton" parent="PausePanel/VBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "Resume"
+
+[node name="SettingsButton" parent="PausePanel/VBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "Settings"
+
+[node name="CreditsButton" parent="PausePanel/VBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "Credits"
+
+[node name="ExitButton" parent="PausePanel/VBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "Exit to Menu"
+
+[node name="SettingsPanel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 152.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 76
+text = "الأعدادات"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("6_text_script")
+
+[node name="setter" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21145834
+anchor_top = 0.20185184
+anchor_right = 0.8109375
+anchor_bottom = 0.25555557
+theme_override_fonts/font = ExtResource("7_markazi_font")
+theme_override_font_sizes/font_size = 41
+text = "لغة العرض"
+horizontal_alignment = 2
+script = ExtResource("6_text_script")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="SettingsPanel/setter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.8448275
+theme_override_styles/panel = SubResource("StyleBoxFlat_panels")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" parent="SettingsPanel/setter" instance=ExtResource("3_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6293519
+anchor_top = 1.422
+anchor_right = 0.629352
+anchor_bottom = 1.422
+offset_left = -147.38403
+offset_top = -24.476006
+offset_right = 146.61597
+offset_bottom = 24.523994
+pivot_offset = Vector2(147.0, 24.5)
+theme_override_font_sizes/font_size = 40
+text = "اللغة العربية"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" parent="SettingsPanel/setter" instance=ExtResource("3_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3739218
+anchor_top = 1.422
+anchor_right = 0.37392184
+anchor_bottom = 1.422
+offset_left = -147.38403
+offset_top = -24.476006
+offset_right = 146.61597
+offset_bottom = 24.523994
+pivot_offset = Vector2(147.0, 24.5)
+theme_override_font_sizes/font_size = 40
+text = "English"
+metadata/_edit_use_anchors_ = true
+
+[node name="setter2" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21145834
+anchor_top = 0.30555558
+anchor_right = 0.8109375
+anchor_bottom = 0.35925928
+theme_override_fonts/font = ExtResource("7_markazi_font")
+theme_override_font_sizes/font_size = 41
+text = "مستوى الصوت الكلي"
+horizontal_alignment = 2
+script = ExtResource("6_text_script")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="SettingsPanel/setter2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.8448275
+theme_override_styles/panel = SubResource("StyleBoxFlat_panels")
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" parent="SettingsPanel/setter2" instance=ExtResource("8_slider")]
+layout_mode = 1
+anchor_left = 0.15291052
+anchor_top = 1.0
+anchor_right = 0.82450044
+anchor_bottom = 1.844828
+value = 100.0
+
+[node name="setter3" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21145834
+anchor_top = 0.4092593
+anchor_right = 0.8109375
+anchor_bottom = 0.462963
+theme_override_fonts/font = ExtResource("7_markazi_font")
+theme_override_font_sizes/font_size = 41
+text = "مستوى صوت الحوارات"
+horizontal_alignment = 2
+script = ExtResource("6_text_script")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="SettingsPanel/setter3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.8448275
+theme_override_styles/panel = SubResource("StyleBoxFlat_panels")
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" parent="SettingsPanel/setter3" instance=ExtResource("8_slider")]
+layout_mode = 1
+anchor_left = 0.15291052
+anchor_top = 0.9999992
+anchor_right = 0.82450044
+anchor_bottom = 1.8448288
+value = 80.0
+
+[node name="setter4" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21145834
+anchor_top = 0.51296294
+anchor_right = 0.8109375
+anchor_bottom = 0.56666666
+theme_override_fonts/font = ExtResource("7_markazi_font")
+theme_override_font_sizes/font_size = 41
+text = "مستوى المؤثرات الصوتية"
+horizontal_alignment = 2
+script = ExtResource("6_text_script")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="SettingsPanel/setter4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.8448275
+theme_override_styles/panel = SubResource("StyleBoxFlat_panels")
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" parent="SettingsPanel/setter4" instance=ExtResource("8_slider")]
+layout_mode = 1
+anchor_left = 0.15291052
+anchor_top = 1.0000002
+anchor_right = 0.82450044
+anchor_bottom = 1.8448279
+value = 80.0
+
+[node name="setter5" type="Label" parent="SettingsPanel"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21145834
+anchor_top = 0.61666673
+anchor_right = 0.8109375
+anchor_bottom = 0.6703703
+theme_override_fonts/font = ExtResource("7_markazi_font")
+theme_override_font_sizes/font_size = 41
+text = "مستوى صوت الموسيقى"
+horizontal_alignment = 2
+script = ExtResource("6_text_script")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="SettingsPanel/setter5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.8448275
+theme_override_styles/panel = SubResource("StyleBoxFlat_panels")
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" parent="SettingsPanel/setter5" instance=ExtResource("8_slider")]
+layout_mode = 1
+anchor_left = 0.15291052
+anchor_top = 1.0000021
+anchor_right = 0.82450044
+anchor_bottom = 1.8448323
+value = 80.0
+
+[node name="Button" parent="SettingsPanel" instance=ExtResource("3_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86822915
+anchor_top = 0.9111111
+anchor_right = 0.93958336
+anchor_bottom = 0.9453704
+offset_right = 0.0
+offset_bottom = 0.0
+pivot_offset = Vector2(68.5, 18.5)
+theme_override_font_sizes/font_size = 30
+text = "رجوع"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" parent="SettingsPanel" instance=ExtResource("3_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6921875
+anchor_top = 0.9111111
+anchor_right = 0.82708335
+anchor_bottom = 0.9453704
+offset_right = 0.0
+offset_bottom = 0.0
+pivot_offset = Vector2(129.5, 18.5)
+theme_override_font_sizes/font_size = 30
+text = "استعادة الافتراضي"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button3" parent="SettingsPanel" instance=ExtResource("3_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.53697914
+anchor_top = 0.9111111
+anchor_right = 0.6302083
+anchor_bottom = 0.9453704
+offset_right = 0.0
+offset_bottom = 0.0
+pivot_offset = Vector2(89.5, 18.5)
+theme_override_font_sizes/font_size = 30
+text = "حفظ"
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitConfirmation" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ExitConfirmation"]
+material = SubResource("ShaderMaterial_title")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -150.0
+offset_right = 400.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 70
+text = "Quit Game?"
+horizontal_alignment = 1
+script = ExtResource("6_text_script")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ExitConfirmation"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = 50.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="YesButton" parent="ExitConfirmation/HBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "Yes"
+
+[node name="NoButton" parent="ExitConfirmation/HBoxContainer" instance=ExtResource("3_button")]
+layout_mode = 2
+text = "No"
+
+[connection signal="pressed" from="PausePanel/VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PausePanel/VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PausePanel/VBoxContainer/CreditsButton" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="PausePanel/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="SettingsPanel/setter/Button" to="." method="_on_language_pressed" binds= [1]]
+[connection signal="pressed" from="SettingsPanel/setter/Button2" to="." method="_on_language_pressed" binds= [0]]
+[connection signal="pressed" from="SettingsPanel/Button" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="SettingsPanel/Button2" to="." method="_on_restore_defaults_pressed"]
+[connection signal="pressed" from="SettingsPanel/Button3" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="ExitConfirmation/HBoxContainer/YesButton" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="ExitConfirmation/HBoxContainer/NoButton" to="." method="_on_no_pressed"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dqkvcfhwwmgbm"
+path="res://.godot/imported/Ost main theme + gameplay.ogg-d0a0d4c85fa0e0d4a3c70e1154206284.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sounds/Ost main theme + gameplay.ogg"
+dest_files=["res://.godot/imported/Ost main theme + gameplay.ogg-d0a0d4c85fa0e0d4a3c70e1154206284.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

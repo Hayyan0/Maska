@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv4ym3lg7x8e4"]
+
+[ext_resource type="Script" uid="uid://dkryfeqj6fggp" path="res://Project_jam_UI/scripts/HUD.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://Project_jam_UI/scenes/pause_menu.tscn" id="2_pause_menu"]
+[ext_resource type="FontFile" uid="uid://bacillbyoj4uf" path="res://Project_jam_UI/font_folder/static/MarkaziText-Bold.ttf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
+bg_color = Color(0, 0, 0, 0.470588)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_pause_menu")]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 475.59998
+offset_bottom = 161.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="HeadIcon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeartsContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DirectorCam" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -552.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 328.0
+grow_horizontal = 0
+
+[node name="FrameRatio" type="AspectRatioContainer" parent="DirectorCam"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="DirectorMargin" type="MarginContainer" parent="DirectorCam/FrameRatio"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="SpriteClipper" type="Control" parent="DirectorCam/FrameRatio/DirectorMargin"]
+clip_contents = true
+layout_mode = 2
+
+[node name="BgColor" type="ColorRect" parent="DirectorCam/FrameRatio/DirectorMargin/SpriteClipper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.960784, 0.819608, 0.839216, 1)
+
+[node name="FaceCam" type="TextureRect" parent="DirectorCam/FrameRatio/DirectorMargin/SpriteClipper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cover" type="TextureRect" parent="DirectorCam/FrameRatio"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubtitleLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -180.0
+offset_right = 800.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 54
+text = "Subtitle Text Sample"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

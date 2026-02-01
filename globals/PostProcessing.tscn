@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4jh6jpy2fhi6"]
+
+[ext_resource type="Script" uid="uid://wp1lles5r7ab" path="res://globals/PostProcessing.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://b8xkmjxsl6hd4" path="res://assets/shaders/global_post_process.gdshader" id="1_shader"]
+[ext_resource type="Shader" uid="uid://c1s6tn7kotn3o" path="res://Project_jam_UI/shaders/eroor.gdshader" id="2_glitch"]
+
+[sub_resource type="Environment" id="Environment_bloom"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 0.0
+glow_levels/2 = 0.0
+glow_levels/3 = 1.0
+glow_levels/4 = 0.0
+glow_levels/5 = 1.0
+glow_strength = 1.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.8
+glow_hdr_scale = 1.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bloom"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pp"]
+shader = ExtResource("1_shader")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.4
+shader_parameter/grain_amount = 0.015
+shader_parameter/chromatic_aberration = 0.0
+shader_parameter/brightness = 1.0
+shader_parameter/saturation = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glitch"]
+shader = ExtResource("2_glitch")
+shader_parameter/shake_power = 0.6
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 35.0
+shader_parameter/shake_color_rate = 0.01
+
+
+[node name="PostProcessing" type="Node"]
+script = ExtResource("1_script")
+cute_glow_strength = 0.7
+cute_glow_hdr_threshold = 1.0
+cute_brightness = 1.0
+cute_saturation = 1.05
+tough_glow_strength = 0.9
+tough_glow_hdr_threshold = 0.8
+tough_saturation = 1.0
+tough_vignette_opacity = 0.05
+tough_chromatic = 0.001
+natural_glow_strength = 0.7
+ui_glow_strength = 1.1
+ui_glow_hdr_threshold = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bloom")
+camera_attributes = SubResource("CameraAttributesPractical_bloom")
+
+[node name="ShaderLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="EffectRect" type="ColorRect" parent="ShaderLayer"]
+material = SubResource("ShaderMaterial_pp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GlitchRect" type="ColorRect" parent="ShaderLayer"]
+visible = false
+material = SubResource("ShaderMaterial_glitch")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

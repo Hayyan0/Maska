@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxyc17x4k767r"]
+
+[ext_resource type="Script" uid="uid://8f7wvadsr6lq" path="res://Project_jam_UI/Global(autoLoad)/language_setting.gd" id="1_km0od"]
+
+[node name="LangugeSetting" type="Node"]
+script = ExtResource("1_km0od")

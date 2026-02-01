@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3iqtw2djgfac"]
+
+[ext_resource type="Script" uid="uid://lo5ore2in6f2" path="res://Project_jam_UI/scripts/mouse_display.gd" id="1_foglw"]
+[ext_resource type="PackedScene" uid="uid://bwhom5kgvigh0" path="res://Project_jam_UI/scenes/mouse.tscn" id="2_saotl"]
+
+[node name="mouse_display" type="CanvasLayer" node_paths=PackedStringArray("mouse")]
+process_mode = 3
+layer = 128
+script = ExtResource("1_foglw")
+mouse = NodePath("mouse")
+
+[node name="mouse" parent="." instance=ExtResource("2_saotl")]
+mouse_behavior_recursive = 1

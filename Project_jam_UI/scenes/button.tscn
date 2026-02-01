@@ -1,0 +1,200 @@
+[gd_scene load_steps=18 format=3 uid="uid://dtp26o6qyil6i"]
+
+[ext_resource type="FontFile" uid="uid://d2n6cetff6sce" path="res://Project_jam_UI/font_folder/MarkaziText-VariableFont_wght.ttf" id="1_bu3l8"]
+[ext_resource type="Shader" uid="uid://crd7phgckn4nf" path="res://Project_jam_UI/shaders/newtext_effect.gdshader" id="1_re8mk"]
+[ext_resource type="Script" uid="uid://pglffo5pgdu3" path="res://Project_jam_UI/scripts/button.gd" id="1_x060l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4744l"]
+shader = ExtResource("1_re8mk")
+shader_parameter/reveal = 0.0
+shader_parameter/distortion_strength = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/modulate_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2gwlc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4744l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wiosn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6yuc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3e78"]
+
+[sub_resource type="Animation" id="Animation_2gwlc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.085, 1.085)]
+}
+
+[sub_resource type="Animation" id="Animation_bu3l8"]
+resource_name = "hovred"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.085, 1.085)]
+}
+
+[sub_resource type="Animation" id="Animation_4744l"]
+resource_name = "unhovred"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.69135684, 0.6913568, 0.69135684, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gwlc"]
+_data = {
+&"RESET": SubResource("Animation_2gwlc"),
+&"hovred": SubResource("Animation_bu3l8"),
+&"unhovred": SubResource("Animation_4744l")
+}
+
+[sub_resource type="Animation" id="Animation_c6yuc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/reveal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wiosn"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/reveal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_r3e78"]
+resource_name = "outro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/reveal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7cipb"]
+_data = {
+&"RESET": SubResource("Animation_c6yuc"),
+&"intro": SubResource("Animation_wiosn"),
+&"outro": SubResource("Animation_r3e78")
+}
+
+[node name="Button" type="Button"]
+material = SubResource("ShaderMaterial_4744l")
+offset_right = 294.0
+offset_bottom = 70.0
+scale = Vector2(1.085, 1.085)
+pivot_offset = Vector2(147, 37.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_bu3l8")
+theme_override_font_sizes/font_size = 61
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2gwlc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4744l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wiosn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c6yuc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r3e78")
+text = "اللعب"
+script = ExtResource("1_x060l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2gwlc")
+}
+blend_times = [&"hovred", &"hovred", 1.0, &"hovred", &"unhovred", 1.0, &"unhovred", &"hovred", 1.0, &"unhovred", &"unhovred", 1.0]
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7cipb")
+}
+
+[node name="mouse_position" type="Node2D" parent="."]
+position = Vector2(294, 37.5)
+
+[node name="mouse_position2" type="Node2D" parent="."]
+position = Vector2(0, 37.5)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

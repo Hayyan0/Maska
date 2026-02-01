@@ -32,9 +32,9 @@
 [ext_resource type="AudioStream" uid="uid://rgcfh616rjur" path="res://assets/SEQ/3_Cute.ogg" id="34_n2naj"]
 [ext_resource type="AudioStream" uid="uid://qso85hu1nplv" path="res://assets/SEQ/4_Cute.ogg" id="35_n2naj"]
 [ext_resource type="PackedScene" uid="uid://16vs2vw1qpq7" path="res://objects/TreeObject.tscn" id="35_vkugn"]
+[ext_resource type="AudioStream" uid="uid://dkm01c42drp73" path="res://Jumana Loay bickering with SFX.wav" id="35_vnlif"]
 [ext_resource type="AudioStream" uid="uid://bnshrwji0juqs" path="res://assets/SEQ/5_Cute.ogg" id="36_n2naj"]
 [ext_resource type="AudioStream" uid="uid://c8u2mcsew0pos" path="res://assets/SEQ/6_tough.ogg" id="37_n2naj"]
-[ext_resource type="AudioStream" uid="uid://drm5qga0xn61v" path="res://assets/SEQ/Arguing.ogg" id="38_n2naj"]
 [ext_resource type="AudioStream" uid="uid://dno5e6t6hvihs" path="res://assets/tough/Sounds/ar_luay6.ogg" id="39_n2naj"]
 [ext_resource type="AudioStream" uid="uid://br6yvypqcr8x6" path="res://assets/cute/Voice/ar_Jumana-5.ogg" id="40_n2naj"]
 [ext_resource type="AudioStream" uid="uid://c6vvn43t0ven8" path="res://assets/tough/Sounds/ar_luay7.ogg" id="41_n2naj"]
@@ -463,7 +463,7 @@ director_expression = "Talking"
 
 [sub_resource type="Resource" id="Resource_Step7"]
 script = ExtResource("30_n2naj")
-audio_clip = ExtResource("38_n2naj")
+audio_clip = ExtResource("35_vnlif")
 events = Array[ExtResource("31_n2naj")]([SubResource("Resource_Event1"), SubResource("Resource_Event2"), SubResource("Resource_Event3"), SubResource("Resource_Event4"), SubResource("Resource_Event5"), SubResource("Resource_Event6"), SubResource("Resource_Event7"), SubResource("Resource_Event8"), SubResource("Resource_Event9")])
 
 [sub_resource type="Resource" id="Resource_TreeStep1"]

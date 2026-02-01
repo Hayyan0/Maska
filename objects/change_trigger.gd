@@ -108,7 +108,7 @@ func _validate_property(property: Dictionary):
 			
 	# Hide Level End settings
 	if property.name in ["next_scene", "loading_image"]:
-		if type != TriggerType.LEVEL_END:
+		if type != TriggerType.LEVEL_END and type != TriggerType.SEQUENCE:
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 	
 	# Hide Sequence settings
@@ -316,14 +316,16 @@ func run_sequence():
 				GameManager.trigger_glitch(5.0) # Increased to overlap fade
 				# Wait 4.2s (glitch is 5s, transition fade is 0.8s)
 				await get_tree().create_timer(4.2).timeout
-				print("[Sequence] Switching to BossFight.tscn")
-				TransitionLayer.full_transition_to_level("res://BossFight.tscn")
+				print("[Sequence] Switching to Next Scene")
+				var target_scene = next_scene if next_scene != "" else "res://BossFight.tscn"
+				TransitionLayer.full_transition_to_level(target_scene, loading_image)
 				return
 			else:
 				print("[Sequence] Audio too short for cinematic sync, immediate transition after play.")
 				# Fallback if audio is short: wait for it and then transition
 				await get_tree().create_timer(max(0.1, dur)).timeout
-				TransitionLayer.full_transition_to_level("res://BossFight.tscn")
+				var target_scene = next_scene if next_scene != "" else "res://BossFight.tscn"
+				TransitionLayer.full_transition_to_level(target_scene, loading_image)
 				return
 		
 		# Normal step logic (not boss transition)

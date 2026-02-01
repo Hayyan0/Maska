@@ -11,6 +11,7 @@ extends Node2D
 @export var sound_delay: float = 1.0
 @export var start_subtitle: String = ""
 @export var initial_mode: GameManager.GameMode = GameManager.GameMode.NATURAL
+@export var hide_director: bool = false
 
 func _ready():
 	# Final polish: Smooth Fade From Black
@@ -40,6 +41,14 @@ func _ready():
 	if is_instance_valid(PostProcessing) and GameManager:
 		# We manually trigger the change to ensure it applies
 		PostProcessing._on_game_mode_changed(GameManager.current_mode)
+	
+	# Apply hide_director setting to HUD
+	var hud = get_node_or_null("HUD")
+	if hud and "show_director" in hud:
+		hud.show_director = not hide_director
+		# Force refresh HUD mode to apply the visibility change
+		if hud.has_method("_on_mode_changed"):
+			hud._on_mode_changed(GameManager.current_mode)
 
 func _play_level_start_sound():
 	var audio_player = AudioStreamPlayer.new()

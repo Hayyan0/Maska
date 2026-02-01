@@ -230,14 +230,7 @@ func _physics_process(delta):
 			)
 			jump_buffer_timer = 0
 			coyote_timer = 0
-		elif can_double_jump and GameManager.current_mode == GameManager.GameMode.CUTE:
-			# Double Jump (Instant, no ground to push off)
-			# USE EXPORTED VARIABLE DIRECTLY
-			velocity.y = jump_cute
-			can_double_jump = false
-			jump_buffer_timer = 0
-			is_preparing_jump = false # Safety reset
-			sprite.position.y = 0
+
 		
 	# Variable Jump Height (REMOVED: User requested fixed jump)
 	

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dfeooej0d3ioy" path="res://assets/natural/Tiles/right.png" id="6_o6eak"]
 [ext_resource type="PackedScene" uid="uid://dg4k8k8k8k8k8" path="res://objects/invisible_barrier.tscn" id="7_8r63q"]
 [ext_resource type="Texture2D" uid="uid://ded7biscaomqh" path="res://assets/tough/tree2.png" id="7_v3q8f"]
-[ext_resource type="PackedScene" path="res://objects/background_layer.tscn" id="8_jooga"]
+[ext_resource type="PackedScene" uid="uid://b5k8k8k8k8k8" path="res://objects/background_layer.tscn" id="8_jooga"]
 [ext_resource type="Texture2D" uid="uid://p3ry3c7htrwx" path="res://assets/natural/placeholder_material.png" id="10_jooga"]
 [ext_resource type="Texture2D" uid="uid://bta5bf0ffu8d6" path="res://assets/cute/Tiles/CuteTiles-Recovered.png" id="10_mxksj"]
 [ext_resource type="Texture2D" uid="uid://ck3hakpfrhq2p" path="res://assets/cute/8_20260127001941.png" id="11_2o5vc"]
@@ -1453,13 +1453,13 @@ wander_width = 100.0
 attack_range = 50.0
 health = 5
 attack_cooldown = 1.5
+debug_show_ranges = false
 
 [node name="Player" parent="." instance=ExtResource("59_ev0b5")]
 position = Vector2(977, 767)
 speed_cute = 250.0
 jump_cute = -350.0
 speed_tough = 200.0
-jump_tough = 0.0
 speed_natural = 300.0
 jump_natural = -300.0
 frames_natural = ExtResource("3_gjdut")
@@ -1494,6 +1494,7 @@ camera_lock = false
 cute_texture = ExtResource("19_81hpc")
 tough_texture = ExtResource("20_wi5gn")
 audio_clip = ExtResource("21_81hpc")
+volume_db = 0.0
 subtitle_text = "ولكم إلى عااالم المرح!! يلا استكشف هذا العالم الجميل!"
 affected_by_gravity = true
 
@@ -1507,6 +1508,7 @@ position = Vector2(1868, 709)
 position = Vector2(2033, 803)
 type = 3
 active_in_mode = 0
+volume_db = 0.0
 
 [node name="ChangeTrigger3" parent="." instance=ExtResource("14_2o5vc")]
 position = Vector2(3809, 398)
@@ -1515,6 +1517,7 @@ active_in_mode = 0
 cute_texture = ExtResource("19_81hpc")
 tough_texture = ExtResource("20_wi5gn")
 audio_clip = ExtResource("23_dpuk5")
+volume_db = 0.0
 subtitle_text = "معليش بس عالم الأحلام الوردي هذا ما جاز لي، وين الأكشن؟!"
 
 [node name="EnemyWalker" parent="." instance=ExtResource("16_l8jcf")]
@@ -1524,6 +1527,7 @@ wander_width = 100.0
 attack_range = 50.0
 health = 5
 attack_cooldown = 1.5
+debug_show_ranges = false
 
 [node name="ChangeTrigger4" parent="." instance=ExtResource("14_2o5vc")]
 position = Vector2(7184, 119)
@@ -1534,6 +1538,7 @@ target_mode = 0
 switch_delay = 2.0
 cute_texture = ExtResource("19_81hpc")
 audio_clip = ExtResource("24_k0qb5")
+volume_db = 0.0
 subtitle_text = "لاااا عبقري ما شاء الله! الحل في الرشاقة يا فلتة زمانك"
 affected_by_gravity = true
 wait_for_signal = true
@@ -1542,6 +1547,7 @@ wait_for_signal = true
 position = Vector2(7181, 989)
 type = 4
 active_in_mode = 1
+volume_db = 0.0
 signal_targets = [NodePath("../ChangeTrigger4")]
 
 [node name="EnemyWalker3" parent="." instance=ExtResource("16_l8jcf")]
@@ -1550,6 +1556,7 @@ sight_range = 250.0
 wander_width = 100.0
 attack_range = 50.0
 attack_cooldown = 1.5
+debug_show_ranges = false
 
 [node name="ChangeTrigger6" parent="." instance=ExtResource("14_2o5vc")]
 position = Vector2(7559, 788)
@@ -1557,6 +1564,7 @@ type = 5
 active_in_mode = 0
 next_scene = "uid://c0lqbqoafewpl"
 loading_image = ExtResource("11_2o5vc")
+volume_db = 0.0
 
 [node name="HUD" parent="." instance=ExtResource("20_hud")]
 
@@ -1567,6 +1575,7 @@ position = Vector2(2542, 805)
 type = 1
 active_in_mode = 0
 audio_clip = ExtResource("25_wi5gn")
+volume_db = 0.0
 subtitle_text = "استخدم زر المسافة عشان تنط!"
 director_expression = "Happy"
 
@@ -1575,6 +1584,7 @@ position = Vector2(4857, 804)
 type = 1
 active_in_mode = 1
 audio_clip = ExtResource("27_q3idb")
+volume_db = 0.0
 subtitle_text = "اضغط زر enter عشان تضرب بالسيف"
 director_expression = "Talking"
 
@@ -1583,6 +1593,7 @@ position = Vector2(6112, 799)
 type = 1
 active_in_mode = 1
 audio_clip = ExtResource("28_kw1rj")
+volume_db = 0.0
 subtitle_text = "زامن ضربتك مع هجمة الخصم عشان تصد ضربته"
 
 [node name="ChangeTrigger10" parent="." instance=ExtResource("14_2o5vc")]
@@ -1590,6 +1601,7 @@ position = Vector2(7182, 990)
 type = 1
 active_in_mode = 1
 audio_clip = ExtResource("30_v3q8f")
+volume_db = 0.0
 subtitle_text = "اوه معليش، نسيت انك ما تقدر تنط"
 director_expression = "Talking"
 

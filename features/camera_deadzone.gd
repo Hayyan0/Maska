@@ -12,6 +12,10 @@ extends Camera2D
 @onready var player = get_parent()
 var max_x_seen: float = -INF
 
+# Shake variables
+var shake_intensity: float = 0.0
+var shake_timer: float = 0.0
+
 func _ready():
 	# Initial position at player
 	global_position = player.global_position
@@ -24,6 +28,10 @@ func force_update_position():
 		global_position = player.global_position
 		# Reset deadzone tracking
 		max_x_seen = global_position.x
+
+func shake(duration: float, intensity: float):
+	shake_timer = duration
+	shake_intensity = intensity
 
 func _physics_process(delta):
 	if not player: return
@@ -72,6 +80,16 @@ func _physics_process(delta):
 	# Smoothly move the camera with separate horizontal/vertical speeds
 	global_position.x = lerp(global_position.x, target_pos.x, horizontal_follow_speed * delta)
 	global_position.y = lerp(global_position.y, target_pos.y, vertical_follow_speed * delta)
+	
+	# Apply Shake
+	if shake_timer > 0:
+		shake_timer -= delta
+		offset = Vector2(
+			randf_range(-shake_intensity, shake_intensity),
+			randf_range(-shake_intensity, shake_intensity)
+		)
+	else:
+		offset = Vector2.ZERO
 
 func _has_floor_below() -> bool:
 	if not player: return false

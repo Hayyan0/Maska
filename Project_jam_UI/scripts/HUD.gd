@@ -20,6 +20,7 @@ const COLOR_CUTE = Color("#f5d1d6")
 const COLOR_TOUGH = Color("#cbd6f0")
 
 var heart_nodes: Array[TextureRect] = []
+var show_director = true
 
 func _ready():
 	_setup_hearts()
@@ -70,6 +71,8 @@ func _on_mode_changed(mode):
 	var new_director = "Jumana" if mode == GameManager.GameMode.CUTE else "Luay"
 	if mode != GameManager.GameMode.NATURAL:
 		GameManager.update_director(new_director, "Normal")
+	
+	$DirectorCam.visible = show_director and (mode != GameManager.GameMode.NATURAL)
 
 func _on_director_updated(director_name, expression):
 	var path = "res://assets/Directors/" + director_name + "/" + expression + ".png"
